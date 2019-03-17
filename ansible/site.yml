@@ -1,0 +1,37 @@
+---
+- name: Provision k3s nodes
+  hosts: k3s-server:k3s-agents
+  remote_user: pi
+  become: yes
+  become_user: root
+
+  roles:
+    - common
+    - { role: k3s-common }
+
+- name: Provision k3s server node
+  hosts: k3s-server
+  remote_user: pi
+  become: yes
+  become_user: root
+
+  roles:
+    - { role: k3s-server }
+
+- name: Get k3s server config for all nodes
+  hosts: all
+  remote_user: pi
+  become: yes
+  become_user: root
+
+  roles:
+    - { role: k3s-config }
+
+- name: Provision k3s agent nodes
+  hosts: k3s-agents
+  remote_user: pi
+  become: yes
+  become_user: root
+
+  roles:
+    - { role: k3s-agent }

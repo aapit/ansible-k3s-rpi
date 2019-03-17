@@ -1,0 +1,31 @@
+---
+- name: Install k3s agent service
+  get_url:
+    url: https://raw.githubusercontent.com/rancher/k3s/master/k3s.service
+    dest: /etc/systemd/system/k3s-agent.service
+    mode: a+x
+    force: yes
+
+- name: Replace server command in k3s agent service with agent command
+  replace:
+    path: /etc/systemd/system/k3s-agent.service
+    regexp: '^ExecStart=/usr/local/bin/k3s server$'
+    replace: 'ExecStart=/bin/bash -c "/usr/local/bin/k3s agent -s \"${K3S_SERVER_ADDRESS}\" -t \"${K3S_CLUSTER_TOKEN}\""'
+
+- name: Add server address to root env vars
+  lineinfile:
+    path: /etc/environment
+    regexp: '^export K3S_SERVER_ADDRESS='
+    line: "export K3S_SERVER_ADDRESS=\"{{ k3s_server_address }}\""
+
+- name: Add cluster token to root env vars
+  lineinfile:
+    path: /etc/environment
+    regexp: '^export K3S_CLUSTER_TOKEN='
+    line: "export K3S_CLUSTER_TOKEN=\"{{ k3s_cluster_token }}\""
+
+- name: Enable and start the k3s agent service
+  service:
+    name: k3s-agent
+    enabled: yes
+    state: started

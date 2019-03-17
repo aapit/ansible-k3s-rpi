@@ -1,0 +1,6 @@
+[k3s-server]
+kube1.example.com
+
+[k3s-agents]
+kube2.example.com
+kube3.example.com

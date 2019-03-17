@@ -1,0 +1,24 @@
+---
+- name: Get node token
+  slurp:
+    src: /var/lib/rancher/k3s/server/node-token
+  register: k3s_cluster_token
+  run_once: true
+
+- name: Clean up node token contents
+  set_fact: 
+    k3s_cluster_token: "{{ k3s_cluster_token['content'] | b64decode | replace('\n', '')}}"
+  run_once: yes
+
+- name: Print cluster node token
+  debug:
+    msg: "{{ k3s_cluster_token }}"
+
+- name: Set server address
+  set_fact:
+    k3s_server_address: "https://{{ inventory_hostname }}:6443"
+  run_once: yes
+
+- name: Print server address
+  debug:
+    msg: "{{ k3s_server_address }}"

@@ -1,0 +1,24 @@
+---
+- name: Set GPU memory split to 16 MB
+  lineinfile:
+    path: /boot/config.txt
+    line: 'gpu_mem=16'
+    create: yes
+
+- name: Add cgroup directives to boot commandline config
+  lineinfile:
+    path: /boot/cmdline.txt
+    regexp: '((.)+?)(\scgroup_\w+=\w+)*$'
+    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
+    backrefs: yes
+
+- name: Reboot the node
+  reboot:
+
+- name: Download k3s binary
+  get_url: url=https://github.com/rancher/k3s/releases/download/v0.2.0/k3s-armhf dest=/usr/local/bin/k3s mode=a+x
+
+- name: Point hostname to localhost (k3s requirement)
+  lineinfile:
+    path: /etc/hosts
+    line: "127.0.0.1 {{inventory_hostname}}"
