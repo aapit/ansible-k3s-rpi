@@ -8,7 +8,7 @@ This Ansible playbook turns your fleet of Raspberry Pi into Kubernetes cattle wi
 Optional but advisable: use SSH key auth and disable password login. 
 The default ssh credentials for a Raspberry Pi are username `pi` and password `raspberry`.
 - Copy your pubkey to the Pi with `ssh-copy-id pi@kube1.example.com`
-- In `/etc/ssh/sshd_config`, set `PasswordAuthentication` to `no`
+- In `/etc/ssh/sshd_config` on the Pi, set `PasswordAuthentication` to `no`
 
 # Configure ansible setup
 - Copy `ansible/hosts.template` to `ansible/hosts` for your configuration
