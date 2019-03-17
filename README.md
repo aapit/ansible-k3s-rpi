@@ -28,7 +28,7 @@ This will:
 - Install the k3s binary on the 'server' Pi (the leading node)
 - Install a `k3s-server` service on the server and start it
 - Fetch the node token from the server
-- Start the k3s service on the agents with the server node token
+- Install and start a `k3s-agent` service on the agents, joining the cluster
 - Enable autostart on boot for k3s on all nodes
 
 # See if it worked
