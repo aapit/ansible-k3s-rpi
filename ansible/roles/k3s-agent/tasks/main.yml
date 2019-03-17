@@ -10,19 +10,11 @@
   replace:
     path: /etc/systemd/system/k3s-agent.service
     regexp: '^ExecStart=/usr/local/bin/k3s server$'
-    replace: 'ExecStart=/bin/bash -c "/usr/local/bin/k3s agent -s \"${K3S_SERVER_ADDRESS}\" -t \"${K3S_CLUSTER_TOKEN}\""'
+    replace: 'ExecStart=/usr/local/bin/k3s agent -s "{{ k3s_server_address}}" -t "{{ k3s_cluster_token }}"'
 
-- name: Add server address to root env vars
-  lineinfile:
-    path: /etc/environment
-    regexp: '^export K3S_SERVER_ADDRESS='
-    line: "export K3S_SERVER_ADDRESS=\"{{ k3s_server_address }}\""
-
-- name: Add cluster token to root env vars
-  lineinfile:
-    path: /etc/environment
-    regexp: '^export K3S_CLUSTER_TOKEN='
-    line: "export K3S_CLUSTER_TOKEN=\"{{ k3s_cluster_token }}\""
+- name: Reload systemd daemon to ensure latest service config
+  systemd:
+    daemon_reload: yes
 
 - name: Enable and start the k3s agent service
   service:
