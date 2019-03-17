@@ -12,6 +12,7 @@ The default ssh credentials for a Raspberry Pi are username `pi` and password `r
 
 # Configure ansible setup
 - Copy `ansible/hosts.template` to `ansible/hosts` for your configuration
+- Choose one of the Raspberries to lead / orchestrate your cluster; we'll call this the _server_
 - In `ansible/hosts`, fill out the ip or hostname for the leading Raspberry under `[k3s-server]`
 - Fill out the ip's or hostnames for the rest of your cattle under `[k3s-agents]`
 
