@@ -1,4 +1,9 @@
 ---
+- name: Wait until node token is generated
+  wait_for:
+    path: /var/lib/rancher/k3s/server/node-token
+  run_once: true
+
 - name: Get node token
   slurp:
     src: /var/lib/rancher/k3s/server/node-token
