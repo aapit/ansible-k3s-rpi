@@ -11,3 +11,5 @@ core_update_level: true
 
 ssh_user: pi
 ssh_identity_key: ~/.ssh/id_rsa.pub
+
+k3s_version: 0.2.0
