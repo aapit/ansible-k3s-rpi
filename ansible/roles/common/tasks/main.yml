@@ -7,9 +7,10 @@
 - name: Set hostname to inventory hostname
   hostname: name={{inventory_hostname}}
 
-- name: Update apt cache
+- name: Update apt cache and upgrade
   apt:
     update_cache: yes
+    upgrade: yes
 
 - name: Remove useless packages from the cache
   apt:
