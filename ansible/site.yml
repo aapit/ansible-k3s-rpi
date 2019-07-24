@@ -7,7 +7,7 @@
 
   roles:
     - common
-    - { role: k3s-common }
+    - { role: k3s-common, tags: common }
 
 - name: Provision k3s server node
   hosts: k3s-server
@@ -16,7 +16,7 @@
   become_user: root
 
   roles:
-    - { role: k3s-server }
+    - { role: k3s-server, tags: server }
 
 - name: Get k3s server config for all nodes
   hosts: all
@@ -25,7 +25,7 @@
   become_user: root
 
   roles:
-    - { role: k3s-config }
+    - { role: k3s-config, tags: config }
 
 - name: Provision k3s agent nodes
   hosts: k3s-agents
@@ -34,4 +34,4 @@
   become_user: root
 
   roles:
-    - { role: k3s-agent }
+    - { role: k3s-agent, tags: agent }
