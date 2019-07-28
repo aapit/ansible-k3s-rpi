@@ -5,7 +5,7 @@ This Ansible playbook turns your fleet of Raspberry Pi into Kubernetes cattle wi
 - Create an empty `ssh` file in the root of the SD card (volume is called `boot`)
 
 # Secure your Raspberries
-Optional but advisable: use SSH key auth and disable password login. 
+Optional but advisable: use SSH key auth and disable password login.
 The default ssh credentials for a Raspberry Pi are username `pi` and password `raspberry`.
 - Copy your pubkey to the Pi with `ssh-copy-id pi@kube1.example.com`
 - In `/etc/ssh/sshd_config` on the Pi, set `PasswordAuthentication` to `no`
@@ -15,6 +15,7 @@ The default ssh credentials for a Raspberry Pi are username `pi` and password `r
 - Choose one of the Raspberries to lead / orchestrate your cluster; we'll call this the _server_
 - In `ansible/hosts`, fill out the ip or hostname for the leading Raspberry under `[k3s-server]`
 - Fill out the ip's or hostnames for the rest of your cattle under `[k3s-agents]`
+- Specify `k3s_version` in group_vars/all
 
 I personally prefer using the Pi's hardware mac address to assign a hostname and ip address within the LAN by DHCP, but you could also set a static ip address on the Pi.
 

@@ -15,10 +15,10 @@
 - name: Reboot the node
   reboot:
 
-- name: Download k3s binary
-  get_url: url=https://github.com/rancher/k3s/releases/download/v0.2.0/k3s-armhf dest=/usr/local/bin/k3s mode=a+x
+- name: Download k3s binary for ARM
+  get_url: url=https://github.com/rancher/k3s/releases/download/v{{ k3s_version }}/k3s-armhf dest=/usr/local/bin/k3s mode=a+x
 
 - name: Point hostname to localhost (k3s requirement)
   lineinfile:
     path: /etc/hosts
-    line: "127.0.0.1 {{inventory_hostname}}"
+    line: "127.0.0.1  {{inventory_hostname}}"
