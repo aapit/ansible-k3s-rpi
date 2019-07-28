@@ -1,7 +1,7 @@
 This Ansible playbook turns your fleet of Raspberry Pi into Kubernetes cattle with k3s, the streamlined version of Kubernetes by @rancher that runs silky smooth on the ARM processor powering your Pi.
 
 # Manually prepare your Raspberries
-- Burn Raspian Stretch Lite on an SD card with EtcherBalena, or something alike
+- Burn Raspbian Stretch Lite on an SD card with EtcherBalena, or something alike
 - Create an empty `ssh` file in the root of the SD card (volume is called `boot`)
 
 # Secure your Raspberries
