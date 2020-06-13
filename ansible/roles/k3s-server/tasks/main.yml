@@ -1,4 +1,10 @@
 ---
+- name: Create empty k3s env file
+  copy:
+    content: ""
+    dest:  /etc/systemd/system/k3s.service.env
+    force: no
+
 - name: Install k3s server service
   get_url: 
     url: https://raw.githubusercontent.com/rancher/k3s/master/k3s.service

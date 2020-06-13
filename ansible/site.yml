@@ -1,7 +1,7 @@
 ---
 - name: Provision k3s nodes
   hosts: k3s-server:k3s-agents
-  remote_user: pi
+  remote_user: "{{ ssh_user }}"
   become: yes
   become_user: root
 
@@ -11,7 +11,7 @@
 
 - name: Provision k3s server node
   hosts: k3s-server
-  remote_user: pi
+  remote_user: "{{ ssh_user }}"
   become: yes
   become_user: root
 
@@ -20,7 +20,7 @@
 
 - name: Get k3s server config for all nodes
   hosts: all
-  remote_user: pi
+  remote_user: "{{ ssh_user }}"
   become: yes
   become_user: root
 
@@ -29,7 +29,7 @@
 
 - name: Provision k3s agent nodes
   hosts: k3s-agents
-  remote_user: pi
+  remote_user: "{{ ssh_user }}"
   become: yes
   become_user: root
 
