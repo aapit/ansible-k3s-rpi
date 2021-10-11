@@ -11,6 +11,7 @@
     regexp: '((.)+?)(\scgroup_\w+=\w+)*$'
     line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
     backrefs: yes
+    create: yes
 
 - name: Reboot the node
   reboot:
